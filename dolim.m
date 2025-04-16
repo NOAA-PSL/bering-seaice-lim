@@ -23,7 +23,7 @@ function [L,Q,B,Gtau,C0,Ctau,ualpha,valpha,galpha,tau_decay_alpha,T_mode_oscil,v
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % center the time series
-x = x-nanmean(x);
+x = x-mean(x,'omitnan');
 
 % x is transposed as
 xT = transpose(x);
@@ -82,14 +82,6 @@ for k1 = 1:D
 
     for k2 = 1:D
 
-%         a = x(tau_0+1:end,k1);
-%         b = xT(k2,1:N-tau_0)';
-%         ind = find(isnan(a) | isnan(b));
-%         a(ind) = [];
-%         b(ind) = [];
-%         Ctau(k1,k2) = sum(a.*b) / (length(a)-tau_0-1);
-%         varCtau(k1,k2) = var(a);
-
         a = x(:,k1);
         b = transpose(xT(k2,:));
         a = a(tau_0+1:end);
@@ -129,9 +121,6 @@ ualpha = ualpha(:,galpha_sort_ind);
 [~,valpha_sort_ind] = sort(diag(galpha_adj),'descend');
 valpha = valpha(:,valpha_sort_ind);
 
-% resid = ualpha * valpha'; % if already normalized, this will be 1
-% valpha = valpha / resid;
-
 % Compute beta then normalize by tau to generalize
 %   Note that Balpha all have negative real psrts and like modes ualpha and
 %   adjoints valpha, are either real or complex conjugates.
@@ -163,9 +152,6 @@ else
 end    
 ualpha = un; % set u to normalized u
 
-% recalculate galpha using B
-%galpha = exp(diag(B)*tau_0);
-
 % Calculate the oscillation period
 T_mode_oscil = diag(2*pi ./ imag(B));
 
@@ -179,7 +165,6 @@ if ~any(imag(L) > 10^-4)
     L = real(L);
 else
     disp('L is complex');
-    %L = real(L); %return
 end
 
 % Eq. A9 Land paper. Fluctuation-dissipation relation.
@@ -193,9 +178,3 @@ end
 
 disp('All done. Happy Limming :)');
 disp(' ');
-
-
-
-
-
-
