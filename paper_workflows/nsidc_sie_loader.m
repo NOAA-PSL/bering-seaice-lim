@@ -15,8 +15,9 @@
 %
 %   Loads sea ice index data and does some processing for Cox and Penland
 %   (in prep), as described in the paper.
-
+%
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % -- OPTIONS --------------------------------------------------------------
 
