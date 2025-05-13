@@ -64,7 +64,7 @@ count = 1;
 for y = 1:length(d)
 
     cd([d(y).folder,'/',d(y).name]);
-    dd = dir('*_*');
+    dd = [dir('0*_*');dir('1*_*')]; 
 
     for m = 1:length(dd)
 
