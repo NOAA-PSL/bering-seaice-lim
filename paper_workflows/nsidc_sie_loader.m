@@ -37,7 +37,7 @@ lat = 50:0.1:90; % degrees latitude
 % -- MAIN -----------------------------------------------------------------
 
 % Data directory
-data_dir = '/Users/ccox/Documents/Projects/2024/bering_ice/nsidc/';
+data_dir = '/path';
 d = [dir([data_dir,'1*']);dir([data_dir,'2*'])];
 for k = 1:length(d); if strcmp(d(k).name,num2str(yr_start)); break; end; end
 d = d(k:end); % begin at yr_start 
