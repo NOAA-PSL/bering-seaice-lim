@@ -1,8 +1,9 @@
 # Code Repo: Medium-Range Predictability of the Wintertime Bering Sea Ice Edge using Linear Inverse Modeling
 
+LIM codes and paper workflow in MATLAB for:
+
 Christopher J. Cox and Cecile Penland, Medium-Range Predictability of the Wintertime Bering Sea Ice Edge using Linear Inverse Modeling. 
 
-The paper is in review so updates may be made.
 
 ## License
 
