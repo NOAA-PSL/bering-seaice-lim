@@ -5,7 +5,7 @@
 %[text] **Timescales of interest:** Synoptic to subseasonal scales, mostly 48 hours to 3 weeks.
 %[text] **Code Dependencies:** 
 %[text] Developed in MATLAB R2024b, but should be backward compatable to ~R2019b
-%[text] C. Cox's development fork of the Torrence and Compo (1998) wavelet codes, [https://github.com/chrisjcox/wavelets/tree/develop](https://github.com/chrisjcox/wavelets/tree/develop) 
+%[text] Torrence and Compo (1998) wavelet codes [https://github.com/ct6502/wavelets](https://github.com/ct6502/wavelets) 
 %[text] Colorbrewer for colormaps. The exact code is depreciated, I think, so I suggest replacing cbrewer.m calls with your preference.
 %[text] There is a section near the end that uses m\_map, [https://www-old.eoas.ubc.ca/~rich/map.html](https://www-old.eoas.ubc.ca/~rich/map.html) and another that uses frank-pk-DataViz-3/daboxplot, [https://www.mathworks.com/matlabcentral/fileexchange/74851-daboxplot](https://www.mathworks.com/matlabcentral/fileexchange/74851-daboxplot) 
 %[text] **References:**
