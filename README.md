@@ -10,7 +10,11 @@ Christopher J. Cox and Cecile Penland, Medium-Range Predictability of the Winter
 
 ## License
 
+Copyright 2025 U.S. Federal Government (in countries where recognized)
+
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+Please refer to the [LICENSE](./LICENSE.txt) and [INTENT](./INTENT.txt) files for details.
 
 ## Disclaimer
 
