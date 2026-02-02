@@ -6,7 +6,7 @@ Christopher J. Cox and Cecile Penland, Medium-Range Predictability of the Winter
 
 ## Cite As
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18355978.svg)](https://doi.org/10.5281/zenodo.18355978)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18461482.svg)](https://doi.org/10.5281/zenodo.18461482)
 
 ## License
 
