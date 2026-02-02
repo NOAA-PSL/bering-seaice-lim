@@ -4,7 +4,7 @@
 %[text] **Purpose:** Update what is known about predictablity of this system; benchmark expectations for minimum skill of NOAA's fully-coupled UFS-Arctic system, currently in development; potential to develop into future statistical forecasst guidance tool
 %[text] **Timescales of interest:** Synoptic to subseasonal scales, mostly 48 hours to 3 weeks.
 %[text] **Code Dependencies:** 
-%[text] Developed in MATLAB R2024b, but should be backward compatable to ~R2019b. Minor changes to colormaps for R2025b consistency with R2024b.
+%[text] MATLAB R2025b, but should be backward compatable to ~R2019b. 
 %[text] Torrence and Compo (1998) wavelet codes [https://github.com/ct6502/wavelets](https://github.com/ct6502/wavelets) 
 %[text] Colorbrewer for colormaps. The exact code is depreciated, I think, so I suggest replacing cbrewer.m calls with your preference.
 %[text] There is a section near the end that uses m\_map, [https://www-old.eoas.ubc.ca/~rich/map.html](https://www-old.eoas.ubc.ca/~rich/map.html) and another that uses frank-pk-DataViz-3/daboxplot, [https://www.mathworks.com/matlabcentral/fileexchange/74851-daboxplot](https://www.mathworks.com/matlabcentral/fileexchange/74851-daboxplot) 
