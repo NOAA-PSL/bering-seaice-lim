@@ -138,13 +138,13 @@ galpha = galpha(ind_descend);
 Balpha = Balpha(ind_descend);
 
 % Make diagonal array of beta
-B = diag(Balpha); % the complex values matter for transpose...something got mixed up above?
+B = diag(Balpha); % the complex values matter for transpose
 
 % normalize modes and adjoints so they are 1 
 % set alpha = beta do the sum on C-H slide: should be 1, if not use the result to scale one of them
 resid = transpose(ualpha) * valpha; % if already normalized, this will be 1
 un = ualpha / resid;
-% check that the normalization is correct, benchamrking again ~single prec roundoffs
+% check that the normalization is correct, benchmarking again ~single prec roundoffs
 if ~any(abs(real(diag(transpose(un)*valpha))-1) < 10^-8)
     disp('u,v are NOT normalized correctly.');
 else
