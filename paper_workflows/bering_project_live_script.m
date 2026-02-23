@@ -113,6 +113,8 @@ nDato = size(iceedge,1);
 iceedgedt = iceedge; % dt is the de-seasonalized time series
 seas = []; % store the season time series
 ndspk = 0; % de-spiking counter
+yrs = unique(yyyy);
+daily_clim_mean = NaN(91,nDato,length(yrs)); % climatological slopes (degLat/day) for each day, year, and station
 gooddata = NaN(1,nDato);
 for k = 1:nDato
     
@@ -130,6 +132,15 @@ for k = 1:nDato
     ndspk = ndspk + length(ibad);
     iceedge(k,ibad) = NaN;
     gooddata(k) = length(find(~isnan(iceedge(k,ismember(mm,mo_inc)))));
+
+    % calculate the daily climatology for Jan-Mar
+    tmp_clim = NaN(91,length(yrs));
+    for j = 1:length(yrs)
+        j_ind = find(yyyy == yrs(j));
+        tmp_clim(:,j) = gradient(iceedge(k,j_ind(1:91))); % calculate the local gradient, dlat/dtime
+    end
+    tmp_clim(abs(tmp_clim) > std(tmp_clim(:),'omitnan')*4) = NaN; % remove outliers
+    daily_clim_mean(:,k,:) = tmp_clim;
     
     % fill gaps. this is just for fitting the seasonal cycle
     % have tried also gap filling with neighboring stations and climatology, but this has little effect
@@ -557,7 +568,7 @@ if save_weights == 1
     % start clean
     if exist(filename,'file'); delete(filename); end
 
-    % store output from dolim, including tau0 reference input
+    % /model group: store output from dolim, including tau0 reference input
     h5create(filename,'/model/B',[size(B),2],'Datatype','double');
     h5write(filename,'/model/B',cat(3,real(B),imag(B)));
     h5writeatt(filename,'/model/B','description','eigenvalue of L, Beta_alpha; dimension three is real and imag parts');
@@ -602,13 +613,33 @@ if save_weights == 1
     h5write(filename,'/model/tau0',tau_0);
     h5writeatt(filename,'/model/tau0','description','lag (tau0) that was used too develop the model');
 
-    % globals
+    % /model group: globals
     h5writeatt(filename,'/model','description','Bering Sea LIM model weights based on training set from Cox & Penland (2026) JGR-Oceans');
     h5writeatt(filename,'/model','git_release',release_version);
     h5writeatt(filename,'/model','morder','F');
     h5writeatt(filename,'/model','sorting','modes are presorted in descending order');
     h5writeatt(filename,'/model','training_range',[num2str(train_years(1)),'-',num2str(train_years(end))]);
 
+    % /clim group: store daily climatological rates
+    %              this information is not part of the model
+    h5create(filename,'/clim/rate_mean',size(daily_clim_mean),'Datatype','double');
+    h5write(filename,'/clim/rate_mean',daily_clim_mean);
+    h5writeatt(filename,'/clim/rate_mean','description','rates of change for each day (DOY), station (deg longitude), and year [day,sta,yrs]');
+    h5writeatt(filename,'/clim/rate_mean','units','[degLatitude/day]');
+
+    h5create(filename,'/clim/sta',size(stind),'Datatype','double');
+    h5write(filename,'/clim/sta',stas(stind));
+    h5writeatt(filename,'/clim/sta','description','stations from Cox & Penland (20260 JGR-Oceans');
+    h5writeatt(filename,'/clim/rate_mean','units','[degLongitude]');
+
+    h5create(filename,'/clim/year',size(yrs),'Datatype','double');
+    h5write(filename,'/clim/year',yrs);
+    h5writeatt(filename,'/clim/rate_mean','description','years');
+
+    h5writeatt(filename,'/clim','description','Climatogical seasonal cycle for years and stations of Cox & Penland (2026) JGR-Oceans expressed as a rate of change');
+    h5writeatt(filename,'/clim','git_release',release_version);
+    h5writeatt(filename,'/clim','morder','F');
+    
     % send us back where we were
     cd(fig_path)
 
